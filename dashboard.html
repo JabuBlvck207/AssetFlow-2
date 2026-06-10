@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AssetFlow Dashboard - Overview of your assets">
+  <title>Dashboard | AssetFlow</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Skip Link for Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" aria-label="Main navigation">
+      <header class="sidebar-header">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect width="40" height="40" rx="10" fill="#2563eb"/>
+            <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text">AssetFlow</span>
+        </div>
+        <button class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>
+        </button>
+      </header>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none">
+          <a href="dashboard.html" class="nav-link active" role="menuitem" aria-current="page">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="assets.html" class="nav-link" role="menuitem">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            <span>Assets</span>
+            <span class="nav-badge" id="assetCount">0</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="assignments.html" class="nav-link" role="menuitem">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            <span>Assignments</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="maintenance.html" class="nav-link" role="menuitem">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Maintenance</span>
+            <span class="nav-badge badge-alert" id="maintenanceCount">3</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="reports.html" class="nav-link" role="menuitem">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span>Reports</span>
+          </a>
+        </li>
+      </ul>
+
+      <footer class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar" aria-hidden="true">
+            <span id="userInitials">--</span>
+          </div>
+          <div class="user-info">
+            <strong id="userName">User</strong>
+            <span id="userRole">Loading...</span>
+          </div>
+        </div>
+        <button onclick="logout()" class="btn-logout" aria-label="Sign out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Sign Out</span>
+        </button>
+      </footer>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <h1>Dashboard</h1>
+          <p class="breadcrumb" aria-label="Breadcrumb">Overview of your assets</p>
+        </div>
+        <div class="top-bar-right">
+          <button class="icon-btn" aria-label="Notifications">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+            <span class="notification-dot" aria-label="3 unread notifications"></span>
+          </button>
+          <button class="icon-btn" aria-label="Search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Stats Cards -->
+      <section class="stats-grid" aria-label="Asset statistics">
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dbeafe; color: #2563eb;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Total Assets</h3>
+            <p class="stat-value" id="totalAssets">0</p>
+            <span class="stat-trend trend-up">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              +12% from last month
+            </span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dcfce7; color: #16a34a;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>In Use</h3>
+            <p class="stat-value" id="inUse">0</p>
+            <span class="stat-trend trend-up">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              +5% from last month
+            </span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #fef3c7; color: #d97706;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Available</h3>
+            <p class="stat-value" id="available">0</p>
+            <span class="stat-trend trend-down">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+              -3% from last month
+            </span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #fee2e2; color: #dc2626;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Overdue</h3>
+            <p class="stat-value" id="overdue">0</p>
+            <span class="stat-trend trend-down">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+              Requires attention
+            </span>
+          </div>
+        </article>
+      </section>
+
+      <!-- Content Grid -->
+      <div class="content-grid">
+        <!-- Recent Activity -->
+        <section class="content-card" aria-labelledby="activity-heading">
+          <header class="card-header">
+            <h2 id="activity-heading">Recent Activity</h2>
+            <a href="#" class="link-text">View all</a>
+          </header>
+          <div class="activity-list" id="recentActivity" role="feed" aria-busy="false">
+            <!-- Activity items populated by JS -->
+            <div class="activity-item skeleton" aria-hidden="true">
+              <div class="activity-avatar skeleton-circle"></div>
+              <div class="activity-content">
+                <div class="skeleton-line" style="width: 60%;"></div>
+                <div class="skeleton-line" style="width: 40%;"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="content-card" aria-labelledby="actions-heading">
+          <header class="card-header">
+            <h2 id="actions-heading">Quick Actions</h2>
+          </header>
+          <div class="quick-actions">
+            <a href="assets.html" class="action-card">
+              <div class="action-icon" style="background: #dbeafe; color: #2563eb;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+              <span>Add New Asset</span>
+            </a>
+            <a href="assignments.html" class="action-card">
+              <div class="action-icon" style="background: #dcfce7; color: #16a34a;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              </div>
+              <span>Assign Asset</span>
+            </a>
+            <a href="maintenance.html" class="action-card">
+              <div class="action-icon" style="background: #fef3c7; color: #d97706;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <span>Schedule Maintenance</span>
+            </a>
+            <a href="reports.html" class="action-card">
+              <div class="action-icon" style="background: #f3e8ff; color: #9333ea;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <span>Export Report</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toastContainer" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
