@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AssetFlow - Maintenance Management for Asset Manager">
+  <title>Maintenance | AssetFlow</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <nav class="sidebar" aria-label="Main navigation">
+      <header class="sidebar-header">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect width="40" height="40" rx="10" fill="#2563eb"/>
+            <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text">AssetFlow</span>
+        </div>
+        <button class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>
+        </button>
+      </header>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none"><a href="asset-manager-dashboard.html" class="nav-link">Dashboard</a></li>
+        <li role="none"><a href="all-assets-manager.html" class="nav-link">All Assets</a></li>
+        <li role="none"><a href="asset-manager.html" class="nav-link">Manage Assignments</a></li>
+        <li role="none"><a href="maintenance-manager.html" class="nav-link active">Maintenance</a></li>
+        <li role="none"><a href="#" class="nav-link">Reports</a></li>
+      </ul>
+
+      <footer class="sidebar-footer">
+        <article class="user-profile">
+          <div class="user-avatar" aria-hidden="true"><span id="userInitials">AM</span></div>
+          <div class="user-info">
+            <strong id="userName">Alex Rivera</strong>
+            <span id="userRole">Asset Manager</span>
+          </div>
+        </article>
+        <button onclick="logout()" class="btn-logout">Sign Out</button>
+      </footer>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <h1>Maintenance</h1>
+          <p class="breadcrumb">Oversee all maintenance requests across the company</p>
+        </div>
+        <div class="top-bar-right">
+          <button onclick="openScheduleModal()" class="btn btn-primary">
+            Schedule New Maintenance
+          </button>
+        </div>
+      </header>
+
+      <!-- Stats Cards -->
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #fef3c7; color: #d97706;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Scheduled</h3>
+            <p class="stat-value" id="scheduledCount">12</p>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #fee2e2; color: #dc2626;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Overdue</h3>
+            <p class="stat-value" id="overdueCount">5</p>
+            <span class="stat-trend trend-down">Requires attention</span>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dbeafe; color: #2563eb;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>In Progress</h3>
+            <p class="stat-value" id="inProgressCount">8</p>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dcfce7; color: #16a34a;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Completed</h3>
+            <p class="stat-value" id="completedCount">47</p>
+          </div>
+        </article>
+      </section>
+
+      <!-- Toolbar -->
+      <section class="toolbar">
+        <div class="toolbar-left">
+          <div class="search-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="search" id="search" placeholder="Search by asset or technician..." oninput="searchMaintenance()">
+          </div>
+          <div class="filter-group">
+            <select id="statusFilter" onchange="searchMaintenance()">
+              <option value="">All Statuses</option>
+              <option value="scheduled">Scheduled</option>
+              <option value="in-progress">In Progress</option>
+              <option value="overdue">Overdue</option>
+              <option value="completed">Completed</option>
+            </select>
+            <select id="priorityFilter" onchange="searchMaintenance()">
+              <option value="">All Priorities</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Maintenance Table -->
+      <section class="content-card table-card">
+        <header class="card-header">
+          <h2>All Maintenance Requests</h2>
+          <span id="showingText" class="table-meta">Showing 0 requests</span>
+        </header>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Asset</th>
+                <th>Issue / Type</th>
+                <th>Reported By</th>
+                <th>Due Date</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Technician</th>
+                <th class="actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="maintenanceTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/maintenance-manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AssetFlow Reports - Analytics and insights">
+  <title>Reports | AssetFlow</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-layout">
+    <!-- Asset Manager Sidebar -->
+    <nav class="sidebar" aria-label="Main navigation">
+      <header class="sidebar-header">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect width="40" height="40" rx="10" fill="#2563eb"/>
+            <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text">AssetFlow</span>
+        </div>
+        <button class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>
+        </button>
+      </header>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none"><a href="asset-manager-dashboard.html" class="nav-link">Dashboard</a></li>
+        <li role="none"><a href="all-assets-manager.html" class="nav-link">All Assets</a></li>
+        <li role="none"><a href="asset-manager.html" class="nav-link">Manage Assignments</a></li>
+        <li role="none"><a href="maintenance-manager.html" class="nav-link">Maintenance</a></li>
+        <li role="none"><a href="reports-manager.html" class="nav-link active">Reports</a></li>
+      </ul>
+
+      <footer class="sidebar-footer">
+        <article class="user-profile">
+          <div class="user-avatar" aria-hidden="true"><span id="userInitials">AM</span></div>
+          <div class="user-info">
+            <strong id="userName">Alex Rivera</strong>
+            <span id="userRole">Asset Manager</span>
+          </div>
+        </article>
+        <button onclick="logout()" class="btn-logout">Sign Out</button>
+      </footer>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <h1>Reports</h1>
+          <p class="breadcrumb">Analytics and insights for asset management</p>
+        </div>
+        <div class="top-bar-right">
+          <button class="icon-btn" aria-label="Export report" onclick="exportReport()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Report Filters -->
+      <section class="report-filters" aria-label="Report filters">
+        <div class="filter-group">
+          <select id="reportType" aria-label="Report type">
+            <option value="overview">Overview</option>
+            <option value="assets">Asset Utilization</option>
+            <option value="assignments">Assignment History</option>
+            <option value="maintenance">Maintenance Summary</option>
+            <option value="utilization">Utilization Trends</option>
+          </select>
+          <select id="dateRange" aria-label="Date range">
+            <option value="7">Last 7 days</option>
+            <option value="30" selected>Last 30 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="365">Last year</option>
+          </select>
+          <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+        </div>
+      </section>
+
+      <!-- Stats Grid -->
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dbeafe; color: #2563eb;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Total Assets</h3>
+            <p class="stat-value" id="reportTotalAssets">248</p>
+            <span class="stat-trend trend-up">+12% from last month</span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dcfce7; color: #16a34a;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 17 9 11 13 15 21 7"/><path d="M21 7h-5v5"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Utilization Rate</h3>
+            <p class="stat-value" id="reportUtilization">75%</p>
+            <span class="stat-trend trend-up">+5% from last month</span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #fef3c7; color: #d97706;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Avg. Assignment Duration</h3>
+            <p class="stat-value" id="reportAvgDuration">24 days</p>
+            <span class="stat-trend trend-down">-3 days</span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #fee2e2; color: #dc2626;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Overdue Assets</h3>
+            <p class="stat-value" id="reportOverdue">10</p>
+            <span class="stat-trend trend-down">Requires attention</span>
+          </div>
+        </article>
+      </section>
+
+      <!-- Charts Section -->
+      <div class="content-grid reports-grid">
+        <article class="content-card chart-card">
+          <header class="card-header">
+            <h2>Asset Utilization</h2>
+          </header>
+          <div class="chart-container">
+            <canvas id="utilizationChart"></canvas>
+          </div>
+        </article>
+
+        <article class="content-card chart-card">
+          <header class="card-header">
+            <h2>Assignment Trends</h2>
+          </header>
+          <div class="chart-container">
+            <canvas id="trendsChart"></canvas>
+          </div>
+        </article>
+      </div>
+
+      <!-- Bottom Reports -->
+      <div class="content-grid reports-grid">
+        <article class="content-card">
+          <header class="card-header">
+            <h2>Assets by Category</h2>
+          </header>
+          <div class="chart-container chart-container-small">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <header class="card-header">
+            <h2>Top Users by Assets Assigned</h2>
+          </header>
+          <div class="employee-list" id="topUsersList">
+            <!-- Populated by JS -->
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/reports-manager.js"></script>
+</body>
+</html>

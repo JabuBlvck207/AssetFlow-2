@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AssetFlow - Manage Assignments">
+  <title>Manage Assignments | AssetFlow</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <nav class="sidebar" aria-label="Main navigation">
+      <header class="sidebar-header">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect width="40" height="40" rx="10" fill="#2563eb"/>
+            <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text">AssetFlow</span>
+        </div>
+        <button class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>
+        </button>
+      </header>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none"><a href="asset-manager-dashboard.html" class="nav-link">Dashboard</a></li>
+        <li role="none"><a href="all-assets-manager.html" class="nav-link">All Assets</a></li>
+        <li role="none"><a href="asset-manager.html" class="nav-link">Manage Assignments</a></li>
+        <li role="none"><a href="maintenance-manager.html" class="nav-link">Maintenance</a></li>
+        <li role="none"><a href="reports-manager.html" class="nav-link active">Reports</a></li>
+      </ul>
+
+      <footer class="sidebar-footer">
+        <article class="user-profile">
+          <div class="user-avatar" aria-hidden="true"><span id="userInitials">AM</span></div>
+          <div class="user-info">
+            <strong id="userName">Alex Rivera</strong>
+            <span id="userRole">Asset Manager</span>
+          </div>
+        </article>
+        <button onclick="logout()" class="btn-logout">Sign Out</button>
+      </footer>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <h1>Manage Assignments</h1>
+          <p class="breadcrumb">Assign assets to team members • View active loans</p>
+        </div>
+        <div class="top-bar-right">
+          <button onclick="openAssignModal()" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New Assignment
+          </button>
+        </div>
+      </header>
+
+      <!-- Toolbar -->
+      <section class="toolbar">
+        <div class="toolbar-left">
+          <div class="search-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="search" id="search" placeholder="Search assignments..." oninput="searchAssignments()">
+          </div>
+        </div>
+      </section>
+
+      <!-- Assignments Table -->
+      <section class="content-card table-card">
+        <header class="card-header">
+          <h2>Active Assignments</h2>
+          <span id="showingText" class="table-meta">Showing 0 assignments</span>
+        </header>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Asset</th>
+                <th>Assigned To</th>
+                <th>Assigned Date</th>
+                <th>Expected Return</th>
+                <th>Status</th>
+                <th class="actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="assignmentsTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/asset-manager.js"></script>
+</body>
+</html>

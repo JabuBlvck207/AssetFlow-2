@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AssetFlow - Staff Dashboard">
+  <title>Dashboard | AssetFlow</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-layout">
+    <!-- Staff Sidebar -->
+    <nav class="sidebar" aria-label="Main navigation">
+      <header class="sidebar-header">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect width="40" height="40" rx="10" fill="#2563eb"/>
+            <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text">AssetFlow</span>
+        </div>
+        <button class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>
+        </button>
+      </header>
+
+       <ul class="nav-menu" role="menubar">
+        <li role="none"><a href="dashboard-staff.html" class="nav-link">Dashboard</a></li>
+        <li role="none"><a href="my-assets-staff.html" class="nav-link">My Assigned Assets</a></li>
+        <li role="none"><a href="maintenance-staff.html" class="nav-link">Maintenance</a></li>
+        <li role="none"><a href="requests-staff.html" class="nav-link active">Requests</a></li>
+      </ul>
+
+      <footer class="sidebar-footer">
+        <article class="user-profile">
+          <div class="user-avatar" aria-hidden="true"><span id="userInitials">JD</span></div>
+          <div class="user-info">
+            <strong id="userName">John Doe</strong>
+            <span id="userRole">Staff</span>
+          </div>
+        </article>
+        <button onclick="logout()" class="btn-logout">Sign Out</button>
+      </footer>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <h1>Welcome back, John</h1>
+          <p class="breadcrumb">Your personal asset overview</p>
+        </div>
+      </header>
+
+      <!-- Personal Stats -->
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dbeafe; color: #2563eb;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>My Assets</h3>
+            <p class="stat-value" id="myAssetsCount">2</p>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #fef3c7; color: #d97706;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Due Soon</h3>
+            <p class="stat-value" id="dueSoonCount">1</p>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #fee2e2; color: #dc2626;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Overdue Returns</h3>
+            <p class="stat-value" id="overdueCount">0</p>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dcfce7; color: #16a34a;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Recently Returned</h3>
+            <p class="stat-value" id="returnedCount">3</p>
+          </div>
+        </article>
+      </section>
+
+      <div class="content-grid">
+        <!-- Alerts -->
+        <section class="content-card">
+          <header class="card-header">
+            <h2>Important Alerts</h2>
+          </header>
+          <div class="activity-list" id="staffAlerts"></div>
+        </section>
+
+        <!-- My Current Assets -->
+        <section class="content-card">
+          <header class="card-header">
+            <h2>My Current Assets</h2>
+            <a href="staff.html" class="link-text">View All →</a>
+          </header>
+          <div class="activity-list" id="staffAssets"></div>
+        </section>
+      </div>
+
+      <!-- Quick Actions -->
+      <section class="content-card">
+        <header class="card-header">
+          <h2>Quick Actions</h2>
+        </header>
+        <div class="quick-actions">
+          <a href="staff.html" class="action-card">
+            <div class="action-icon" style="background: #dbeafe; color: #2563eb;">📦</div>
+            <span>View My Assets</span>
+          </a>
+          <a href="maintenance.html" class="action-card">
+            <div class="action-icon" style="background: #fee2e2; color: #dc2626;">🛠️</div>
+            <span>Report Issue</span>
+          </a>
+          <a href="#" onclick="requestNewAsset()" class="action-card">
+            <div class="action-icon" style="background: #dcfce7; color: #16a34a;">✉️</div>
+            <span>Request New Asset</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard-staff.js"></script>
+</body>
+</html>
