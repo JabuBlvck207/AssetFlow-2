@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AssetFlow - Maintenance for Staff">
+  <title>Maintenance | AssetFlow</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-layout">
+    <nav class="sidebar" aria-label="Main navigation">
+      <header class="sidebar-header">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect width="40" height="40" rx="10" fill="#2563eb"/>
+            <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text">AssetFlow</span>
+        </div>
+        <button class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>
+        </button>
+      </header>
+
+       <ul class="nav-menu" role="menubar">
+        <li role="none"><a href="dashboard-staff.html" class="nav-link">Dashboard</a></li>
+        <li role="none"><a href="my-assets-staff.html" class="nav-link">My Assigned Assets</a></li>
+        <li role="none"><a href="maintenance-staff.html" class="nav-link active">Maintenance</a></li>
+        <li role="none"><a href="requests-staff.html" class="nav-link">Requests</a></li>
+      </ul>
+      <footer class="sidebar-footer">
+        <article class="user-profile">
+          <div class="user-avatar" aria-hidden="true"><span id="userInitials">JD</span></div>
+          <div class="user-info">
+            <strong id="userName">John Doe</strong>
+            <span id="userRole">Staff</span>
+          </div>
+        </article>
+        <button onclick="logout()" class="btn-logout">Sign Out</button>
+      </footer>
+    </nav>
+
+    <main id="main-content" class="main-content">
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <h1>Maintenance</h1>
+          <p class="breadcrumb">Report issues and view your maintenance requests</p>
+        </div>
+        <div class="top-bar-right">
+          <button onclick="openReportIssueModal()" class="btn btn-primary">
+            Report New Issue
+          </button>
+        </div>
+      </header>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #fef3c7; color: #d97706;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Pending Requests</h3>
+            <p class="stat-value" id="pendingCount">2</p>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dbeafe; color: #2563eb;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>In Progress</h3>
+            <p class="stat-value" id="inProgressCount">1</p>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dcfce7; color: #16a34a;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Completed</h3>
+            <p class="stat-value" id="completedCount">4</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="content-card table-card">
+        <header class="card-header">
+          <h2>My Maintenance Requests</h2>
+          <span id="showingText" class="table-meta">Showing 0 requests</span>
+        </header>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Asset</th>
+                <th>Issue</th>
+                <th>Reported Date</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th class="actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="staffMaintenanceTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="reportIssueModal" class="modal" aria-labelledby="modalTitle" aria-modal="true">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2 id="modalTitle">Report New Issue</h2>
+        <button type="button" class="modal-close" onclick="closeReportIssueModal()" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </header>
+
+      <form id="reportIssueForm" class="modal-form">
+        <div class="form-group">
+          <label for="maintenanceAsset">Select Affected Asset</label>
+          <select id="maintenanceAsset" required>
+            <option value="">Select an asset...</option>
+            <option value="laptop-01">Lenovo ThinkPad (Asset #1092)</option>
+            <option value="monitor-02">Dell 27" Monitor (Asset #2045)</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="issueCategory">Issue Type</label>
+            <select id="issueCategory" required>
+              <option value="">Select type</option>
+              <option value="hardware">Hardware Malfunction</option>
+              <option value="software">Software / OS Issue</option>
+              <option value="damage">Physical Damage</option>
+              <option value="accessory">Missing Accessory / Cable</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="issuePriority">Urgency</label>
+            <select id="issuePriority">
+              <option value="medium">Medium</option>
+              <option value="high">High (Blocks Work)</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="issueDescription">Description of the Problem</label>
+          <textarea id="issueDescription" rows="4" placeholder="Please provide details about what's wrong..." required></textarea>
+        </div>
+
+        <footer class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeReportIssueModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Report</button>
+        </footer>
+      </form>
+    </div>
+  </dialog>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/maintenance-staff.js"></script>
+</body>
+</html>

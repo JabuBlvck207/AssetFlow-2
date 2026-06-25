@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AssetFlow - Asset Manager Dashboard">
+  <title>Dashboard | AssetFlow</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-layout">
+    <!-- Sidebar - Asset Manager Navigation -->
+    <nav class="sidebar" aria-label="Main navigation">
+      <header class="sidebar-header">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect width="40" height="40" rx="10" fill="#2563eb"/>
+            <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text">AssetFlow</span>
+        </div>
+        <button class="sidebar-toggle" aria-label="Toggle sidebar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>
+        </button>
+      </header>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none">
+          <a href="asset-manager-dashboard.html" class="nav-link active">
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="all-assets-manager.html" class="nav-link">
+            <span>All Assets</span>
+            <span class="nav-badge" id="totalAssetsCount">0</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="asset-manager.html" class="nav-link">
+            <span>Manage Assignments</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="maintenance-manager.html" class="nav-link">
+            <span>Maintenance</span>
+            <span class="nav-badge badge-alert" id="maintenanceBadge">5</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="#" class="nav-link">
+            <span>Reports</span>
+          </a>
+        </li>
+      </ul>
+
+      <footer class="sidebar-footer">
+        <article class="user-profile">
+          <div class="user-avatar" aria-hidden="true"><span id="userInitials">AM</span></div>
+          <div class="user-info">
+            <strong id="userName">Alex Rivera</strong>
+            <span id="userRole">Asset Manager</span>
+          </div>
+        </article>
+        <button onclick="logout()" class="btn-logout">Sign Out</button>
+      </footer>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <h1>Manager Dashboard</h1>
+          <p class="breadcrumb">Full oversight of company assets • June 2026</p>
+        </div>
+      </header>
+
+      <!-- Enhanced Stats Grid -->
+      <section class="stats-grid" style="grid-template-columns: repeat(5, 1fr);">
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dbeafe; color: #2563eb;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Total Assets</h3>
+            <p class="stat-value" id="totalAssets">248</p>
+            <span class="stat-trend trend-up">+12% this month</span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dcfce7; color: #16a34a;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>In Use</h3>
+            <p class="stat-value" id="inUse">186</p>
+            <span class="stat-trend trend-up">75% utilization</span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #fef3c7; color: #d97706;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Available</h3>
+            <p class="stat-value" id="available">52</p>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #fee2e2; color: #dc2626;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Overdue</h3>
+            <p class="stat-value" id="overdue">10</p>
+            <span class="stat-trend trend-down">Requires action</span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #f3e8ff; color: #9333ea;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <div class="stat-card-content">
+            <h3>Team Members</h3>
+            <p class="stat-value" id="teamMembers">42</p>
+            <span class="stat-trend">Active users</span>
+          </div>
+        </article>
+      </section>
+
+      <div class="content-grid">
+        <!-- Active Assignments -->
+        <section class="content-card">
+          <header class="card-header">
+            <h2>Recent Assignments</h2>
+            <a href="asset-manager.html" class="link-text">Manage All →</a>
+          </header>
+          <div class="activity-list" id="recentAssignments"></div>
+        </section>
+
+        <!-- Maintenance Alerts -->
+        <section class="content-card">
+          <header class="card-header">
+            <h2>Maintenance Alerts</h2>
+            <a href="maintenance.html" class="link-text">View All →</a>
+          </header>
+          <div class="activity-list" id="maintenanceAlerts"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/asset-manager-dashboard.js"></script>
+</body>
+</html>

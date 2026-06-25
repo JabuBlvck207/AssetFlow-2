@@ -1211,3 +1211,1363 @@ vertical-align: middle;
     display: none;
   }
 }
+/* ============================================
+   Asset Manager Dashboard Enhancements
+   ============================================ */
+
+/* 5-Column Stats Grid for Manager Dashboard */
+.stats-grid.manager-grid {
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-5);
+}
+
+@media (max-width: 1280px) {
+  .stats-grid.manager-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid.manager-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Priority Badges for Maintenance */
+.status-badge.high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-badge.medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge.low {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+/* Enhanced Activity Items for Manager Dashboard */
+.activity-item .status-badge {
+  margin-top: var(--space-1);
+  display: inline-flex;
+}
+
+/* Manager-specific Top Bar */
+.top-bar .top-bar-left h1 {
+  font-size: var(--text-3xl);
+}
+
+/* Empty State Styling */
+.empty-state {
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+  color: var(--color-gray-500);
+}
+
+.empty-state p {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-2);
+}
+
+/* Additional Nav Badge Styles */
+.nav-badge.badge-alert {
+  background: #fee2e2;
+  color: #dc2626;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Better spacing for Manager Dashboard Content */
+.content-grid > .content-card {
+  min-height: 380px;
+}
+
+/* Role-specific User Role Colors */
+.user-role-asset-manager {
+  color: #2563eb;
+  font-weight: var(--font-semibold);
+}
+
+.user-role-technician {
+  color: #d97706;
+  font-weight: var(--font-semibold);
+}
+
+.user-role-staff {
+  color: #16a34a;
+  font-weight: var(--font-semibold);
+}
+/* ============================================
+   All Assets Manager Page Styles
+   ============================================ */
+
+/* Toolbar Enhancements */
+.toolbar {
+  margin-bottom: var(--space-6);
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 320px;
+}
+
+.search-box input {
+  padding-left: 48px;
+  width: 100%;
+}
+
+/* Table Specific Improvements */
+.data-table th,
+.data-table td {
+  padding: var(--space-4) var(--space-5);
+}
+
+.data-table th.actions-col,
+.data-table td.actions-col {
+  width: 160px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Status Badges in Table */
+#assetTable .status-badge {
+  font-size: 0.8125rem;
+  padding: 4px 12px;
+  font-weight: var(--font-medium);
+}
+
+/* Action Buttons in Table */
+.actions-col button {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  margin: 0 2px;
+  transition: all var(--transition-fast);
+}
+
+.actions-col button:hover {
+  transform: translateY(-1px);
+}
+
+/* Select All Checkbox */
+#selectAll {
+  width: 18px;
+  height: 18px;
+}
+
+/* Asset Name Column */
+#assetTable td:first-child + td strong {
+  color: var(--color-gray-900);
+  font-weight: var(--font-semibold);
+}
+
+/* Empty State */
+.empty-state {
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+.empty-state p {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-2);
+}
+
+/* Filter Group */
+.filter-group {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.filter-group select {
+  min-width: 160px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .toolbar-left {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-box {
+    min-width: auto;
+  }
+  
+  .data-table th:nth-child(5),
+  .data-table td:nth-child(5) { 
+    display: none; 
+  }
+}
+
+@media (max-width: 768px) {
+  .data-table th:nth-child(6),
+  .data-table td:nth-child(6) { 
+    display: none; 
+  }
+  
+  .actions-col button {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Hover Effect on Table Rows */
+.data-table tbody tr:hover {
+  background: var(--color-primary-50);
+  transition: background var(--transition-base);
+}
+
+/* Bulk Actions Bar (Future) */
+.bulk-actions {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-4);
+  display: none;
+  align-items: center;
+  gap: var(--space-4);
+}
+/* ============================================
+   Manage Assignments Page Styles
+   ============================================ */
+
+#assignmentsTable .status-badge {
+  font-size: 0.8125rem;
+  padding: 5px 12px;
+  font-weight: var(--font-medium);
+}
+
+#assignmentsTable td strong {
+  color: var(--color-gray-900);
+  font-weight: var(--font-semibold);
+}
+
+/* Actions Column Styling */
+#assignmentsTable .actions-col button {
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  transition: all var(--transition-fast);
+}
+
+#assignmentsTable .actions-col button:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+/* Table Row Hover Effect */
+#assignmentsTable tbody tr:hover {
+  background: var(--color-primary-50);
+}
+
+/* Status Badge Variants */
+.status-badge.active {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-badge.overdue {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Toolbar Spacing */
+.toolbar {
+  margin-bottom: var(--space-6);
+}
+
+/* Empty State */
+.empty-state {
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+.empty-state p {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-2);
+}
+
+/* Highlight "Assigned To" Column */
+#assignmentsTable td:nth-child(2) {
+  font-weight: var(--font-medium);
+  color: var(--color-gray-700);
+}
+
+/* Responsive Adjustments for Assignments Table */
+@media (max-width: 992px) {
+  .data-table th:nth-child(4),
+  .data-table td:nth-child(4) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .data-table th:nth-child(5),
+  .data-table td:nth-child(5) {
+    display: none;
+  }
+  
+  #assignmentsTable .actions-col button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
+/* ============================================
+   Maintenance Manager Page Styles
+   ============================================ */
+
+#maintenanceTable .status-badge {
+  font-size: 0.8125rem;
+  padding: 5px 12px;
+  font-weight: var(--font-medium);
+}
+
+/* Priority Badges */
+.status-badge.high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-badge.medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge.low {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+/* Status Badges */
+.status-badge.scheduled {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-badge.in-progress {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge.overdue {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-badge.completed {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+/* Table Enhancements */
+#maintenanceTable td strong {
+  color: var(--color-gray-900);
+  font-weight: var(--font-semibold);
+}
+
+#maintenanceTable .actions-col button {
+  padding: 6px 14px;
+  font-size: 0.875rem;
+}
+
+#maintenanceTable tbody tr:hover {
+  background: var(--color-primary-50);
+}
+
+/* Stats Cards Specific to Maintenance */
+.stats-grid .stat-card:nth-child(2) .stat-trend {
+  color: #dc2626;
+}
+
+/* Toolbar Improvements */
+.toolbar {
+  margin-bottom: var(--space-6);
+}
+
+.filter-group select {
+  min-width: 170px;
+}
+
+/* Empty State */
+.empty-state {
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+.empty-state p {
+  font-size: var(--text-base);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1100px) {
+  .data-table th:nth-child(3),
+  .data-table td:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .data-table th:nth-child(7),
+  .data-table td:nth-child(7) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .data-table th:nth-child(6),
+  .data-table td:nth-child(6),
+  .data-table th:nth-child(5),
+  .data-table td:nth-child(5) {
+    display: none;
+  }
+}
+/* ============================================
+   Reports Manager Page Styles
+   ============================================ */
+
+/* Report Filters */
+.report-filters {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.report-filters .filter-group {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.report-filters select {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-300);
+  min-width: 180px;
+}
+
+/* Reports Grid */
+.reports-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.chart-card {
+  padding: 0;
+}
+
+.chart-card .card-header {
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--color-gray-100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-container {
+  padding: var(--space-6);
+  height: 320px;
+  position: relative;
+}
+
+.chart-container-small {
+  height: 240px;
+}
+
+/* Category List */
+.category-list {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.category-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+}
+
+.category-color {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.category-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--color-gray-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.category-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  display: block;
+}
+
+.category-count,
+.category-percent {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-gray-600);
+  white-space: nowrap;
+}
+
+/* Employee / Top Users List */
+.employee-list {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.employee-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  transition: background var(--transition-fast);
+}
+
+.employee-item:hover {
+  background: var(--color-gray-50);
+}
+
+.employee-rank {
+  width: 28px;
+  height: 28px;
+  background: var(--color-gray-100);
+  color: var(--color-gray-600);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-semibold);
+  font-size: 0.9rem;
+}
+
+.employee-avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-semibold);
+}
+
+.employee-info {
+  flex: 1;
+}
+
+.employee-name {
+  font-weight: var(--font-semibold);
+  margin-bottom: 2px;
+}
+
+.employee-count {
+  text-align: right;
+  font-weight: var(--font-medium);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .reports-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .report-filters .filter-group {
+    flex-direction: column;
+  }
+  
+  .chart-container {
+    height: 260px;
+  }
+}
+/* ============================================
+   Technician Maintenance Page Styles
+   ============================================ */
+
+#technicianMaintenanceTable .status-badge {
+  font-size: 0.8125rem;
+  padding: 5px 12px;
+  font-weight: var(--font-medium);
+}
+
+/* Priority Badges */
+.status-badge.high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-badge.medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge.low {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+/* Status Badges */
+.status-badge.pending {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-badge.in-progress {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge.overdue {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-badge.completed {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+/* Table Enhancements */
+#technicianMaintenanceTable td strong {
+  color: var(--color-gray-900);
+}
+
+#technicianMaintenanceTable .actions-col button {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  margin: 0 3px;
+}
+
+/* Strong hover effect for technician tasks */
+#technicianMaintenanceTable tbody tr:hover {
+  background: var(--color-primary-50);
+}
+
+/* Stats Cards for Technician */
+.stats-grid .stat-card {
+  transition: transform var(--transition-fast);
+}
+
+.stats-grid .stat-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Technician-specific empty state */
+.empty-state {
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+.empty-state p {
+  font-size: var(--text-lg);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .data-table th:nth-child(3),
+  .data-table td:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .data-table th:nth-child(6),
+  .data-table td:nth-child(6),
+  .data-table th:nth-child(5),
+  .data-table td:nth-child(5) {
+    display: none;
+  }
+  
+  #technicianMaintenanceTable .actions-col button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
+/* ============================================
+   Technician Dashboard Styles
+   ============================================ */
+
+/* Technician Personal Stats */
+#technicianMaintenanceTable .status-badge,
+.stats-grid .stat-card {
+  transition: all var(--transition-base);
+}
+
+.stats-grid .stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Urgent Alerts & Tasks Styling */
+#urgentAlerts .activity-item,
+#myTasks .activity-item {
+  border-left: 4px solid;
+}
+
+#urgentAlerts .activity-item {
+  border-left-color: #dc2626;
+}
+
+#myTasks .activity-item {
+  border-left-color: #2563eb;
+}
+
+/* Priority & Status Badges on Dashboard */
+.status-badge.high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-badge.medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge.low {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+/* Quick Actions Section */
+.quick-actions {
+  padding: var(--space-5);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-4);
+}
+
+.action-card {
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+
+.action-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary-200);
+}
+
+.action-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 12px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* Welcome Message */
+.top-bar-left h1 {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-1);
+}
+
+/* Technician-specific activity items */
+.activity-item time {
+  font-size: var(--text-xs);
+  color: var(--color-gray-500);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* ============================================
+   Technician My Assigned Assets Page Styles
+   ============================================ */
+
+#myAssetsTable .status-badge {
+  font-size: 0.8125rem;
+  padding: 5px 12px;
+  font-weight: var(--font-medium);
+}
+
+/* Status Badges */
+.status-badge.in-use {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-badge.available {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+/* Table Enhancements */
+#myAssetsTable td strong {
+  color: var(--color-gray-900);
+  font-weight: var(--font-semibold);
+}
+
+#myAssetsTable .actions-col button {
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  transition: all var(--transition-fast);
+}
+
+#myAssetsTable .actions-col button:hover {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+/* Row Hover Effect */
+#myAssetsTable tbody tr:hover {
+  background: var(--color-primary-50);
+}
+
+/* Technician-specific empty state */
+.empty-state {
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+.empty-state p {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-2);
+}
+
+.empty-state .field-hint {
+  font-size: var(--text-sm);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .data-table th:nth-child(2),
+  .data-table td:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .data-table th:nth-child(5),
+  .data-table td:nth-child(5) {
+    display: none;
+  }
+  
+  #myAssetsTable .actions-col button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
+/* ============================================
+   Technician Schedule Page Styles
+   ============================================ */
+
+#scheduleTable .status-badge {
+  font-size: 0.8125rem;
+  padding: 5px 12px;
+  font-weight: var(--font-medium);
+}
+
+/* Priority Badges */
+.status-badge.high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-badge.medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge.low {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+/* Status Badges */
+.status-badge.scheduled {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-badge.overdue {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Table Enhancements */
+#scheduleTable td strong {
+  color: var(--color-gray-900);
+  font-weight: var(--font-semibold);
+}
+
+#scheduleTable .actions-col button {
+  padding: 6px 16px;
+  font-size: 0.875rem;
+}
+
+/* Row Hover */
+#scheduleTable tbody tr:hover {
+  background: var(--color-primary-50);
+}
+
+/* Date Column Emphasis */
+#scheduleTable td:first-child strong {
+  font-size: 1.05rem;
+}
+
+/* Technician Schedule Stats */
+.stats-grid .stat-card {
+  transition: transform var(--transition-fast);
+}
+
+.stats-grid .stat-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Empty State */
+.empty-state {
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+.empty-state p {
+  font-size: var(--text-lg);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .data-table th:nth-child(3),
+  .data-table td:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .data-table th:nth-child(5),
+  .data-table td:nth-child(5) {
+    display: none;
+  }
+  
+  #scheduleTable .actions-col button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
+/* ============================================
+   Staff Dashboard Styles
+   ============================================ */
+
+/* Staff Welcome & Personal Stats */
+.top-bar-left h1 {
+  font-size: var(--text-3xl);
+  color: var(--color-gray-900);
+}
+
+.stats-grid .stat-card {
+  transition: transform var(--transition-fast);
+}
+
+.stats-grid .stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Alerts Section */
+#staffAlerts .activity-item {
+  border-left: 4px solid #dc2626;
+}
+
+#staffAlerts .activity-item:nth-child(even) {
+  border-left-color: #2563eb;
+}
+
+/* Current Assets Section */
+#staffAssets .activity-item {
+  border-left: 4px solid #16a34a;
+}
+
+/* Quick Actions for Staff */
+.quick-actions {
+  padding: var(--space-5);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4);
+}
+
+.action-card {
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  text-align: center;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  color: var(--color-gray-700);
+}
+
+.action-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.action-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 12px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  transition: transform var(--transition-fast);
+}
+
+.action-card:hover .action-icon {
+  transform: scale(1.1);
+}
+
+/* Status Badges on Dashboard */
+.status-badge {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+}
+
+/* Empty State */
+.activity-empty {
+  padding: var(--space-8);
+  text-align: center;
+  color: var(--color-gray-500);
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* ============================================
+   Staff My Assigned Assets Page Styles
+   ============================================ */
+
+#myAssetsTable .status-badge {
+  font-size: 0.8125rem;
+  padding: 5px 12px;
+  font-weight: var(--font-medium);
+}
+
+/* Status Badges */
+.status-badge.in-use {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-badge.available {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-badge.maintenance {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+/* Table Enhancements */
+#myAssetsTable td strong {
+  color: var(--color-gray-900);
+  font-weight: var(--font-semibold);
+}
+
+#myAssetsTable .actions-col button {
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  transition: all var(--transition-fast);
+}
+
+#myAssetsTable .actions-col button:hover {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+/* Strong row hover effect */
+#myAssetsTable tbody tr:hover {
+  background: var(--color-primary-50);
+}
+
+/* Empty State */
+.empty-state {
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+.empty-state p {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-2);
+}
+
+/* Responsive Adjustments for Staff Assets Page */
+@media (max-width: 992px) {
+  .data-table th:nth-child(2),
+  .data-table td:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .data-table th:nth-child(4),
+  .data-table td:nth-child(4),
+  .data-table th:nth-child(5),
+  .data-table td:nth-child(5) {
+    display: none;
+  }
+  
+  #myAssetsTable .actions-col button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
+/* ============================================
+   Staff Maintenance Page Styles
+   ============================================ */
+
+#staffMaintenanceTable .status-badge {
+  font-size: 0.8125rem;
+  padding: 5px 12px;
+  font-weight: var(--font-medium);
+}
+
+/* Priority Badges */
+.status-badge.high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-badge.medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge.low {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+/* Status Badges */
+.status-badge.pending {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-badge.in-progress {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge.completed {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+/* Table Enhancements */
+#staffMaintenanceTable td strong {
+  color: var(--color-gray-900);
+  font-weight: var(--font-semibold);
+}
+
+#staffMaintenanceTable .actions-col button {
+  padding: 6px 14px;
+  font-size: 0.875rem;
+}
+
+/* Row Hover */
+#staffMaintenanceTable tbody tr:hover {
+  background: var(--color-primary-50);
+}
+
+/* Stats Cards for Staff Maintenance */
+.stats-grid .stat-card {
+  transition: transform var(--transition-fast);
+}
+
+.stats-grid .stat-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Empty State */
+.empty-state {
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+.empty-state p {
+  font-size: var(--text-lg);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .data-table th:nth-child(3),
+  .data-table td:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .data-table th:nth-child(6),
+  .data-table td:nth-child(6) {
+    display: none;
+  }
+}
+/* ============================================
+   Staff Requests Page Styles
+   ============================================ */
+
+#requestsTable .status-badge {
+  font-size: 0.8125rem;
+  padding: 5px 12px;
+  font-weight: var(--font-medium);
+}
+
+/* Request Status Badges */
+.status-badge.pending {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-badge.under-review {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge.approved {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-badge.rejected {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Table Enhancements */
+#requestsTable td strong {
+  color: var(--color-gray-900);
+  font-weight: var(--font-semibold);
+}
+
+#requestsTable .actions-col button {
+  padding: 6px 14px;
+  font-size: 0.875rem;
+}
+
+/* Row Hover Effect */
+#requestsTable tbody tr:hover {
+  background: var(--color-primary-50);
+}
+
+/* Stats Cards for Requests */
+.stats-grid .stat-card {
+  transition: transform var(--transition-fast);
+}
+
+.stats-grid .stat-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Empty State */
+.empty-state {
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+.empty-state p {
+  font-size: var(--text-lg);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .data-table th:nth-child(3),
+  .data-table td:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .data-table th:nth-child(5),
+  .data-table td:nth-child(5) {
+    display: none;
+  }
+}

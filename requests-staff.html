@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AssetFlow - Request New Assets">
+  <title>Requests | AssetFlow</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-layout">
+    <!-- Staff Sidebar -->
+    <nav class="sidebar" aria-label="Main navigation">
+      <header class="sidebar-header">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect width="40" height="40" rx="10" fill="#2563eb"/>
+            <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text">AssetFlow</span>
+        </div>
+        <button class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>
+        </button>
+      </header>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none"><a href="dashboard-staff.html" class="nav-link">Dashboard</a></li>
+        <li role="none"><a href="my-assets-staff.html" class="nav-link">My Assigned Assets</a></li>
+        <li role="none"><a href="maintenance-staff.html" class="nav-link">Maintenance</a></li>
+        <li role="none"><a href="requests-staff.html" class="nav-link active">Requests</a></li>
+      </ul>
+
+      <footer class="sidebar-footer">
+        <article class="user-profile">
+          <div class="user-avatar" aria-hidden="true"><span id="userInitials">JD</span></div>
+          <div class="user-info">
+            <strong id="userName">John Doe</strong>
+            <span id="userRole">Staff</span>
+          </div>
+        </article>
+        <button onclick="logout()" class="btn-logout">Sign Out</button>
+      </footer>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <h1>Asset Requests</h1>
+          <p class="breadcrumb">Request new or replacement assets</p>
+        </div>
+        <div class="top-bar-right">
+          <button onclick="openNewRequestModal()" class="btn btn-primary">
+            New Request
+          </button>
+        </div>
+      </header>
+
+      <!-- Stats -->
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dbeafe; color: #2563eb;">
+            <span style="font-size: 1.6rem;">📋</span>
+          </div>
+          <div class="stat-card-content">
+            <h3>Pending</h3>
+            <p class="stat-value" id="pendingRequests">2</p>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #fef3c7; color: #d97706;">
+            <span style="font-size: 1.6rem;">⏳</span>
+          </div>
+          <div class="stat-card-content">
+            <h3>Under Review</h3>
+            <p class="stat-value" id="reviewRequests">1</p>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-card-icon" style="background: #dcfce7; color: #16a34a;">
+            <span style="font-size: 1.6rem;">✅</span>
+          </div>
+          <div class="stat-card-content">
+            <h3>Approved</h3>
+            <p class="stat-value" id="approvedRequests">3</p>
+          </div>
+        </article>
+      </section>
+
+      <!-- My Requests Table -->
+      <section class="content-card table-card">
+        <header class="card-header">
+          <h2>My Requests</h2>
+          <span id="showingText" class="table-meta">Showing 0 requests</span>
+        </header>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Requested Item</th>
+                <th>Category</th>
+                <th>Reason</th>
+                <th>Request Date</th>
+                <th>Status</th>
+                <th class="actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="requestsTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- New Request Modal -->
+  <dialog id="newRequestModal" class="modal" aria-labelledby="modalTitle" aria-modal="true">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2 id="modalTitle">Request New Asset</h2>
+        <button type="button" class="modal-close" onclick="closeNewRequestModal()" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </header>
+
+      <form id="newRequestForm" class="modal-form">
+        <div class="form-group">
+          <label for="requestItem">What do you need?</label>
+          <input type="text" id="requestItem" placeholder="e.g., Lenovo ThinkPad X1 Carbon" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="requestCategory">Category</label>
+            <select id="requestCategory" required>
+              <option value="">Select category</option>
+              <option value="laptop">Laptop</option>
+              <option value="desktop">Desktop</option>
+              <option value="mobile">Mobile Device</option>
+              <option value="peripheral">Peripheral</option>
+              <option value="monitor">Monitor</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="requestPriority">Priority</label>
+            <select id="requestPriority">
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="requestReason">Reason / Justification</label>
+          <textarea id="requestReason" rows="4" placeholder="Explain why you need this asset..." required></textarea>
+        </div>
+
+        <footer class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeNewRequestModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Request</button>
+        </footer>
+      </form>
+    </div>
+  </dialog>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/requests-staff.js"></script>
+</body>
+</html>
